@@ -22,15 +22,18 @@
         /*set up instructions block*/
         var instructions = {
           type: "html-keyboard-response",
-          stimulus: "<p>In this task, you will see five arrows on the screen, like the example below.</p>"+
-            "<img src='img/inc1.png'></img>"+
-            "<p>The arrows will be displayed in black and blue.(<)</p>"+
-            "<p>In black conditions: </p>"+
+          stimulus: "<p>In this task, you will see five arrows on the screen either in black or blue colors, like the example below.</p>"+
+            
+            "<p>When arrows are in black,</p>"+
+            "<img src='img/black.png'></img>"+
             "<p>Press the left arrow key if the middle arrow is pointing left. (<)</p>"+
             "<p>Press the right arrow key if the middle arrow is pointing right. (>)</p>"+
-            "<p>In blue conditions: </p>"+
+
+            "<p>When arrows are in blue,</p>"+
+            "<img src='img/blue.png'></img>"+
             "<p>Press the left arrow key if the surrounding (not the middle arrow) arrows are pointing left. (<)</p>"+
             "<p>Press the right arrow key if the surrounding (not the middle arrow) arrows are pointing right. (>)</p>"+
+            "<p>In sum, if blue, respond to the peripheral arrows' direction, if black, respond the direction of the center arrow. </p>"+
             "<p>Press any key to begin.</p>",
           post_trial_gap: 1000
         };
@@ -63,11 +66,11 @@
           },
           {
             stimulus: '<div style="color:blue; font-size:50px"> <<><< </div>',
-            data: { stim_type: 'incongruent', direction: 'right', attend: 'surround'}
+            data: { stim_type: 'incongruent', direction: 'left', attend: 'surround'}
           },
           {
             stimulus: '<div style="color:blue; font-size:50px"> >><>> </div>',
-            data: { stim_type: 'incongruent', direction: 'left', attend: 'surround'}
+            data: { stim_type: 'incongruent', direction: 'right', attend: 'surround'}
           }
         ];
 
