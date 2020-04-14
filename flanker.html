@@ -11,7 +11,7 @@
     </body>
     <script>
         /* experiment parameters */
-        var reps_per_trial_type = 1;
+        var reps_per_trial_type = 4;
 
         /*set up welcome block*/
         var welcome = {
@@ -22,7 +22,7 @@
         /*set up instructions block*/
         var instructions = {
           type: "html-keyboard-response",
-          stimulus: "<p>In this task, you will see five arrows on the screen either in black or blue colors, like the example below.</p>"+
+          stimulus: "<p>In this task, you will see five arrows on the screen either in black or blue colors, like the examples below.</p>"+
             
             "<p>When arrows are in black,</p>"+
             "<img src='img/black.png'></img>"+
@@ -31,48 +31,85 @@
 
             "<p>When arrows are in blue,</p>"+
             "<img src='img/blue.png'></img>"+
-            "<p>Press the left arrow key if the surrounding (not the middle arrow) arrows are pointing left. (<)</p>"+
-            "<p>Press the right arrow key if the surrounding (not the middle arrow) arrows are pointing right. (>)</p>"+
+            "<p>Press the left arrow key if the arrows on each <u> side </u> of the center are pointing left. (<)</p>"+
+            "<p>Press the right arrow key if the arrows on each <u> side </u> of the center are pointing right. (>)</p>"+
             "<p>In sum, if blue, respond to the peripheral arrows' direction, if black, respond the direction of the center arrow. </p>"+
             "<p>Press any key to begin.</p>",
           post_trial_gap: 1000
         };
 
-        /*defining stimuli*/
+        //defining stimuli
         var test_stimuli = [
+           {
+             stimulus: '<div style="font-size:75px"> <<<<< </div>',
+             data: { stim_type: 'congruent', direction: 'left', attend: 'center'}
+           },
+           {
+             stimulus: '<div style="font-size:75px"> >>>>> </div>',
+             data: { stim_type: 'congruent', direction: 'right', attend: 'center'}
+           },
+           {
+             stimulus: '<div style="font-size:75px"> <<><< </div>',
+             data: { stim_type: 'incongruent', direction: 'right', attend: 'center'}
+           },
+           {
+             stimulus: '<div style="font-size:75px"> >><>> </div>',
+             data: { stim_type: 'incongruent', direction: 'left', attend: 'center'}
+           },
+           {
+             stimulus: '<div style="color:blue; font-size:75px"> <<<<< </div>',
+             data: { stim_type: 'congruent', direction: 'left', attend: 'surround'}
+           },
+           {
+             stimulus: '<div style="color:blue; font-size:75px"> >>>>> </div>',
+             data: { stim_type: 'congruent', direction: 'right', attend: 'surround'}
+           },
+           {
+             stimulus: '<div style="color:blue; font-size:75px"> <<><< </div>',
+             data: { stim_type: 'incongruent', direction: 'left', attend: 'surround'}
+           },
+           {
+             stimulus: '<div style="color:blue; font-size:75px"> >><>> </div>',
+             data: { stim_type: 'incongruent', direction: 'right', attend: 'surround'}
+           }
+         ];
+
+/*        var test_stimuli = [
           {
-            stimulus: '<div style="font-size:50px"> <<<<< </div>',
+            stimulus: "img/center_cong_left.png",
             data: { stim_type: 'congruent', direction: 'left', attend: 'center'}
           },
           {
-            stimulus: '<div style="font-size:50px"> >>>>> </div>',
+            stimulus: "img/center_cong_right.png",
             data: { stim_type: 'congruent', direction: 'right', attend: 'center'}
           },
           {
-            stimulus: '<div style="font-size:50px"> <<><< </div>',
+            stimulus: "img/center_incong_right.png",
             data: { stim_type: 'incongruent', direction: 'right', attend: 'center'}
           },
           {
-            stimulus: '<div style="font-size:50px"> >><>> </div>',
+            stimulus: "img/center_incong_left.png",
             data: { stim_type: 'incongruent', direction: 'left', attend: 'center'}
           },
           {
-            stimulus: '<div style="color:blue; font-size:50px"> <<<<< </div>',
+            stimulus: "img/surround_cong_left.png",
             data: { stim_type: 'congruent', direction: 'left', attend: 'surround'}
           },
           {
-            stimulus: '<div style="color:blue; font-size:50px"> >>>>> </div>',
+            stimulus: "img/surround_cong_right.png",
             data: { stim_type: 'congruent', direction: 'right', attend: 'surround'}
           },
           {
-            stimulus: '<div style="color:blue; font-size:50px"> <<><< </div>',
+            stimulus: "img/surround_incong_left.png",
             data: { stim_type: 'incongruent', direction: 'left', attend: 'surround'}
           },
           {
-            stimulus: '<div style="color:blue; font-size:50px"> >><>> </div>',
+            stimulus: "img/surround_incong_right.png",
             data: { stim_type: 'incongruent', direction: 'right', attend: 'surround'}
           }
-        ];
+        ];*/
+
+
 
         /* defining test timeline */
         var test = {
@@ -104,6 +141,7 @@
           type: "html-keyboard-response",
           stimulus: function() {
             var total_trials = Math.round(jsPsych.data.get().filter({trial_type: 'html-keyboard-response'}).count() -2);
+            //var total_trials = jsPsych.data.get().filter({trial_type: 'image-keyboard-response'}).count();
             var accuracy = Math.round(jsPsych.data.get().filter({correct: true}).count() / total_trials * 100);
             var congruent_rt = Math.round(jsPsych.data.get().filter({correct: true, stim_type: 'congruent'}).select('rt').mean());
             var incongruent_rt = Math.round(jsPsych.data.get().filter({correct: true, stim_type: 'incongruent'}).select('rt').mean());
