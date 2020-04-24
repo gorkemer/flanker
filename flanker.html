@@ -8,6 +8,7 @@
         <link href="../jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
         <script src="../jspsych-6.0.5/plugins/jspsych-fullscreen.js"></script>
         <script src="../jspsych-6.0.5/plugins/jspsych-survey-text.js"></script>
+        <script src="../jspsych-6.0.5/plugins/jspsych-instructions.js"></script>
 
     </head>
     <body>
@@ -55,21 +56,20 @@
       // });
 
 
+
         /*set up instructions block*/
         var instructions = {
-          type: "html-keyboard-response",
-          stimulus: "<p>In this task, you will see five arrows on the screen either in black or blue colors, like the examples below.</p>"+
-            
-            "<p>When arrows are in black color,</p>"+
-            "<img src='img/black.png'></img>"+
-            "<p>Press the left arrow key if the middle arrow is pointing left (<). </p>"+
-            "<p>Press the right arrow key if the middle arrow is pointing right (>). <br></p>"+
-
+          type: "instructions",
+          pages: [ "<p>In this task, you will see five arrows on the screen, like the examples below.</p>"+
+            "<img src='img/black.png'></img>",
+            "<p>Press the left arrow key  on the keyboard if the middle arrow is pointing left (<). </p>"+
+            "<p>Press the right arrow key if the middle arrow is pointing right (>). <br></p>",
             "<p><br>When arrows are in <b><font color='blue'>blue</font></b> color,</p>"+
             "<img src='img/blue.png'></img>"+
             "<p>Press the left arrow key if the arrows on each <u> side </u> of the center are pointing left. (<)</p>"+
-            "<p>Press the right arrow key if the arrows on each <u> side </u> of the center are pointing right. (>)</p>",
-          post_trial_gap: 1000
+            "<p>Press the right arrow key if the arrows on each <u> side </u> of the center are pointing right. (>)</p>"
+            ],
+            show_clickable_nav:true
         };
 
         /*set up welcome block*/
